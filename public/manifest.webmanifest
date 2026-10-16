@@ -1,0 +1,33 @@
+{
+  "id": "/",
+  "name": "CONTINGENCIA - Prevención de Inundaciones",
+  "short_name": "Contingencia",
+  "description": "Plataforma inteligente para la prevención de inundaciones, monitoreo hídrico, gestión comunitaria y soluciones de infraestructura verde en Managua, Nicaragua.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#dc2626",
+  "categories": ["weather", "utilities", "productivity"],
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/soyjuanrafa/imagenes-y-iconos-de-aplicaciones/main/logo%20definitivo%20solo%20logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/soyjuanrafa/imagenes-y-iconos-de-aplicaciones/main/logo%20definitivo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

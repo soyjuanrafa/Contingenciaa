@@ -1,0 +1,6 @@
+{
+  "name": "Contingencia - Prevención de Inundaciones",
+  "description": "Plataforma inteligente para la prevención de inundaciones, monitoreo hídrico, gestión comunitaria y soluciones de infraestructura verde en Managua, Nicaragua.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
