@@ -1,70 +1,96 @@
-# CONTINGENCIA &middot; Sistema Integral de Prevención de Inundaciones & Monitoreo de Cauces (Managua, Nicaragua)
+# CONTENCIÓN (CONTINGENCIA) &middot; Sistema Integral de Prevención de Inundaciones & Monitoreo de Cauces (Managua, Nicaragua)
 
-**CONTINGENCIA** es una plataforma tecnológica avanzada diseñada para la gestión de riesgos hidrometeorológicos, monitoreo en tiempo real de cauces, alerta temprana ante crecidas y gestión táctica de emergencias municipales y comunitarias en Managua, Nicaragua.
+**CONTENCIÓN** es una plataforma tecnológica avanzada diseñada para la gestión de riesgos hidrometeorológicos, monitoreo en tiempo real de cauces, alerta temprana ante crecidas y gestión táctica de emergencias municipales y comunitarias en Managua, Nicaragua.
+
+---
+
+## 🎨 Paleta de Colores
+
+La identidad visual está diseñada bajo principios de accesibilidad y claridad institucional, empleando una paleta semántica optimizada para situaciones de emergencia:
+
+| Color / Tono | Código Hex / Clase | Uso Principal en la UI |
+| :--- | :--- | :--- |
+| **Rojo Emergencia / Alerta** | `#DC2626` (`red-600`) / `#FEE2E2` (`red-50`) | Botón SOS, estados críticos de cauces y notificaciones de alta severidad. |
+| **Azul Hidrológico** | `#0284C7` (`sky-600`) / `#E0F2FE` (`sky-50`) | Niveles de agua, mapa hidráulico oficial y estaciones de monitoreo pluvial. |
+| **Verde Ecológico** | `#059669` (`emerald-600`) / `#D1FAE5` (`emerald-50`) | Infraestructura verde, jardines de lluvia y reportes resueltos. |
+| **Ámbar Precaución** | `#D97706` (`amber-600`) / `#FEF3C7` (`amber-50`) | Alertas preventivas y reportes ciudadanos pendientes de verificación. |
+| **Pizarra Neutro (Texto/Fondo)**| `#0F172A` (`slate-900`) / `#F8FAFC` (`slate-50`) | Fondos generales de la aplicación, tipografía institucional y bordes estructurados. |
+
+---
+
+## 📐 Esquemas de Trabajo y Arquitectura
+
+La arquitectura de la aplicación sigue un modelo modular **Offline-First / Progressive Web App (PWA)**:
+
+```
++-------------------------------------------------------------------------+
+|                        Capa de Cliente (Frontend)                       |
+|   React 18 + TypeScript + Tailwind CSS v4 + Simulador Móvil y Desktop   |
++----------------------------------+--------------------------------------+
+                                   |
+            +----------------------+----------------------+
+            | Sincronización bidireccional                | Caché Offline (PWA)
+            v                                             v
++-----------------------+                         +-----------------------+
+|  Firebase Firestore   |                         |   Service Worker &    |
+|   (Autenticación &    |                         |    IndexedDB / Cache  |
+|    Estado en tiempo   |                         |    (Modo sin conex.)  |
+|         real)         |                         +-----------------------+
++-----------------------+
+            ^
+            | Región us-west2
++-----------------------+
+|   Cloud SQL (PostgreSQL)|
+|   (Persistencia y DB) |
++-----------------------+
+```
+
+---
+
+## 🔄 Flujos de Trabajo (Workflows)
+
+### 1. Flujo de Activación y Emergencia SOS
+1. **Acceso Ciudadano**: El usuario abre la app móvil o simulador y pulsa el botón central **SOS**.
+2. **Reproducción de Audio**: El sistema reproduce de inmediato el sonido oficial de alerta (`audio de alerta.mpeg`) respaldado por un sintetizador Web Audio API offline.
+3. **Activación de Protocolo**: Se inicia una cuenta regresiva de evacuación y se transmite la señal al Centro de Mando Municipal.
+4. **Respuesta Rápida**: Las brigadas del COMUPRED visualizan la emergencia geolocalizada en el panel táctico.
+
+### 2. Flujo de Reporte Ciudadano de Incidencias
+1. **Captura**: El ciudadano ingresa a la pestaña "Reportar", adjunta evidencia fotográfica y describe la incidencia (obstrucción de tragantes, desborde de cauce, árbol caído).
+2. **Geolocalización**: El sistema asocia automáticamente la incidencia al distrito y micropresa más cercana.
+3. **Revisión Municipal**: El reporte entra con estado `Pendiente` en el Centro de Mando.
+4. **Atención y Resolución**: Las autoridades cambian el estado a `En Atención` o `Resuelto`, notificando en tiempo real al usuario.
+
+### 3. Flujo de Funcionamiento Offline (PWA / WebAPK)
+1. **Detección de Red**: Si el dispositivo pierde conexión a internet, el **Service Worker** (`sw.js`) intercepta las solicitudes HTTP.
+2. **Caché Estática**: Se sirven los recursos locales y datos almacenados en `localStorage` / caché.
+3. **Sincronización Diferida**: Las acciones realizadas offline se encolan y sincronizan con Firebase al restablecerse la conectividad.
+4. **Instalación APK**: El usuario puede instalar la aplicación directamente en Android mediante el modal de descarga PWA.
 
 ---
 
 ## 🚀 Características Principales
 
-1. **Monitoreo Hidrológico en Tiempo Real**:
-   - Control de los principales cauces y embalses de Managua (Cauce El Chipote, Cauce Oriental, Cauce Cuenca Sur, Embalse Los Gauchos, etc.).
-   - Visualización de niveles pluviales, caudales, capacidad de almacenamiento y estado de alerta (`Estable`, `Precaución`, `Crítico`).
-   - Mapa Hidráulico interactivo con superposiciones de riesgo y estaciones de bombeo.
-
-2. **Simulador Móvil Ciudadano & Botón SOS**:
-   - Interfaz adaptada para dispositivos móviles con navegación fluida (Inicio, Mapa, Reportar, SOS, Alertas, Eco-infraestructura).
-   - **Botón de Emergencia SOS** con reproducción de sonido de alerta oficial (`audio de alerta.mpeg`), cuenta regresiva de evacuación y conexión directa con el COMUPRED y bomberos.
-   - Envío de reportes ciudadanos con geolocalización, categoría (Inundación, Desborde de Cauce, Árbol Caído, Azolve) y carga de evidencias fotográficas.
-
-3. **Centro de Mando Municipal (Administración Táctica)**:
-   - Panel de control para autoridades municipales y brigadas de respuesta rápida.
-   - Gestión y clasificación de incidentes ciudadanos (Pendientes, En Verificación, Atendidos).
-   - Activación de alertas masivas y protocolos de evacuación por distritos.
-
-4. **Funcionamiento Offline & Resiliencia PWA**:
-   - Service Worker avanzado con almacenamiento en caché estático y dinámico para operación sin conexión a internet.
-   - Sincronización automática de datos locales con **Firebase Firestore** y persistencia local (`localStorage`).
-   - **Instalación como WebAPK / PWA**: Guía interactiva y botón de instalación directa en dispositivos Android y navegadores de escritorio.
-
-5. **Identidad Visual Oficial & Diseño Perfeccionista**:
-   - Integración de los logotipos oficiales (`logo definitivo.png` y `logo definitivo solo logo.png`).
-   - Tipografía refinada (*Plus Jakarta Sans*, *DM Sans*) y paleta de colores optimizada (modo claro de alta legibilidad, alertas rojas y acentos hidrológicos).
-
----
-
-## 🛠️ Tecnologías y Arquitectura
-
-- **Frontend**: React 18, TypeScript, Tailwind CSS v4, Lucide React (iconografía).
-- **Herramientas de Compilación**: Vite, VitePWA Plugin.
-- **Backend y Base de Datos**: Firebase Firestore & Cloud SQL (Región `us-west2`).
-- **Audio & Media**: Web Audio API (sirena de respaldo offline) y elementos HTML5 Audio con sonido de alerta personalizado.
+1. **Monitoreo Hidrológico en Tiempo Real**: Control de cauces y embalses (El Chipote, Oriental, Cuenca Sur, etc.) con niveles y capacidad.
+2. **Centro de Mando Municipal**: Panel administrativo para autoridades y brigadas de rescate.
+3. **Identidad Visual Oficial**: Logotipos definitivos y tipografía refinada (*Plus Jakarta Sans*, *DM Sans*).
 
 ---
 
 ## 📦 Instalación y Ejecución Local
 
-1. **Clonar el repositorio e instalar dependencias**:
+1. **Instalar dependencias**:
    ```bash
    npm install
    ```
-
-2. **Iniciar el servidor de desarrollo**:
+2. **Iniciar servidor de desarrollo**:
    ```bash
    npm run dev
    ```
-
 3. **Compilar para producción**:
    ```bash
    npm run build
    ```
-
----
-
-## 📱 Guía de Uso del Simulador y Modos de Vista
-
-- **Vista Dual / Híbrida**: Permite visualizar simultáneamente el simulador móvil y el centro de mando en pantallas de escritorio.
-- **Simulador Móvil**: Experimenta la experiencia del ciudadano en un dispositivo móvil con marco físico ajustable.
-- **Centro de Mando**: Administra alertas, cauces y reportes operativos desde la perspectiva institucional.
 
 ---
 
