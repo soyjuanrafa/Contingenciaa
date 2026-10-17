@@ -1,6 +1,6 @@
 import { CitizenReport, ReservoirSite, AlertNotice, GreenInfraSite, EmergencySOS } from '../types';
 
-export const OFFICIAL_LOGO_URL = "https://raw.githubusercontent.com/soyjuanrafa/imagenes-y-iconos-de-aplicaciones/main/logo%20definitivo.png";
+export const OFFICIAL_LOGO_URL = "https://github.com/soyjuanrafa/imagenes-y-iconos-de-aplicaciones/raw/main/logo%20definitivo%202.png";
 export const OFFICIAL_ISOTIPO_URL = "https://raw.githubusercontent.com/soyjuanrafa/imagenes-y-iconos-de-aplicaciones/main/logo%20definitivo%20solo%20logo.png";
 export const ALERT_AUDIO_URL = "https://raw.githubusercontent.com/soyjuanrafa/imagenes-y-iconos-de-aplicaciones/main/audio%20de%20alerta.mpeg";
 export const OFFICIAL_HYDRAULIC_MAP_URL = "https://raw.githubusercontent.com/soyjuanrafa/imagenes-y-iconos-de-aplicaciones/main/mapa%20hidraulico.jpeg";

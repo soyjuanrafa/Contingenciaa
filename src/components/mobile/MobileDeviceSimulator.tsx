@@ -51,7 +51,7 @@ export const MobileDeviceSimulator: React.FC<MobileDeviceSimulatorProps> = ({ fo
         </div>
         <div>
           <span className="font-display font-extrabold text-xs tracking-tight text-slate-900 leading-tight block">
-            CONTENCIÓN
+            CONTINGENCIA
           </span>
           <span className="text-[10px] text-slate-500 font-medium leading-none block">
             {selectedReservoir.name.replace('Micropresa ', '')}

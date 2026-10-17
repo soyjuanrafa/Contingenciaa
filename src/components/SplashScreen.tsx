@@ -105,7 +105,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({
 
         {/* Brand Title */}
         <h1 className="font-display font-extrabold text-2xl sm:text-3xl tracking-tight text-white">
-          CONTENCIÓN
+          CONTINGENCIA
         </h1>
         <div className="mt-1 flex items-center gap-2">
           <span className="inline-block w-1.5 h-1.5 rounded-full bg-rose-500" />
